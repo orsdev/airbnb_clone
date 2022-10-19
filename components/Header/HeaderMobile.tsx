@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
-import { FilterDark, Search } from "../../constants";
+import { Search } from "../../constants";
 
 const HeaderMobile = () => {
   return (
@@ -10,12 +10,13 @@ const HeaderMobile = () => {
         border="1px solid #dddddd"
         boxShadow="0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%)"
         cursor="pointer"
-        height="54px"
+        height="60px"
         justifyContent="space-between"
         pr="8px"
         width="full"
+        pos="relative"
       >
-        <Flex alignItems="center">
+        <Flex alignItems="center" flex={1}>
           <Button
             variant="unstyled"
             display="flex"
@@ -24,7 +25,8 @@ const HeaderMobile = () => {
           >
             <Search />
           </Button>
-          <Box>
+
+          <Box width="calc(100% - 50px)">
             <Heading as="h5" color="black.100" fontSize="14px" fontWeight={600}>
               Where to?
             </Heading>
@@ -34,7 +36,10 @@ const HeaderMobile = () => {
                 variant="unstyled"
                 color="black.50"
                 fontSize="12px"
-                minW="50px"
+                width={{ base: "20%", sm: "auto" }}
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
               >
                 Anywhere
               </Button>
@@ -50,7 +55,10 @@ const HeaderMobile = () => {
                 variant="unstyled"
                 color="black.50"
                 fontSize="12px"
-                minW="50px"
+                width={{ base: "20%", sm: "auto" }}
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
               >
                 Any week
               </Button>
@@ -66,7 +74,10 @@ const HeaderMobile = () => {
                 variant="unstyled"
                 color="black.50"
                 fontSize="12px"
-                minW="50px"
+                width={{ base: "20%", sm: "auto" }}
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
               >
                 Add guests
               </Button>
@@ -83,7 +94,8 @@ const HeaderMobile = () => {
           height="32px"
           justifyContent="center"
           width="32px"
-          position="relative"
+          position="absolute"
+          right="8px"
         >
           <Image src="/icons/filter.png" alt="Filter Icon" />
         </Button>
