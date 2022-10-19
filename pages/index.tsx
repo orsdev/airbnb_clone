@@ -1,11 +1,13 @@
 import { Box, Flex, Show } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { HeaderMobile, HeaderWeb } from "../components/Header";
+import Tabs from "../components/Tabs/Tabs";
 
 const Home: NextPage = () => {
   return (
     <Box>
-      <Flex height="80px" pos="sticky" top={0}>
+      {/* Header */}
+      <Flex height="80px" pos="sticky" top={0} bg="white" zIndex="banner">
         <Show breakpoint="(min-width: 720px)">
           <HeaderWeb />
         </Show>
@@ -13,6 +15,9 @@ const Home: NextPage = () => {
           <HeaderMobile />
         </Show>
       </Flex>
+
+      {/* Tabs */}
+      <Tabs />
     </Box>
   );
 };
