@@ -53,6 +53,10 @@ const Tabs = () => {
         pt="30px"
         zIndex="docked"
         __css={{
+          ".swiper-tab": {
+            paddingLeft: "40px",
+          },
+
           ".swiper-tab .swiper-wrapper": {
             justifyContent: "space-between",
           },
@@ -83,48 +87,51 @@ const Tabs = () => {
             <Box pos="relative">
               <Box
                 position="absolute"
-                left="6px"
+                left="26px"
                 zIndex="dropdown"
                 __css={{
                   top: "50%",
-                  transform: "translate3d(0 , -50% , 0)",
-                  left: "100%",
-                  width: "40px",
+                  transform: "translate3d(-62% , -50% , 0)",
+                  width: "100px",
                   height: "100%",
                   backgroundImage:
                     "linear-gradient(to right,white,rgb(255 255 255 / 0))",
+                  bg: "white",
                 }}
               />
 
-              <Box
-                ref={prevRef}
-                w="28px"
-                h="28px"
-                boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-                bg="white"
-                cursor="pointer"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="full"
-                position="absolute"
-                left="6px"
-                zIndex="dropdown"
-                __css={{
-                  top: "50%",
-                  transform: "translate3d(0 , -50% , 0)",
+              <Show breakpoint="(min-width: 720px)">
+                <Box
+                  ref={prevRef}
+                  w="28px"
+                  h="28px"
+                  boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
+                  border="1px solid rgb(0 0 0 / 0.3)"
+                  bg="white"
+                  cursor="pointer"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  borderRadius="full"
+                  position="absolute"
+                  left="26px"
+                  zIndex="dropdown"
+                  __css={{
+                    top: "50%",
+                    transform: "translate3d(0 , -50% , 0)",
 
-                  "&:hover": {
-                    boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                  },
+                    "&:hover": {
+                      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                    },
 
-                  "&.swiper-button-disabled": {
-                    display: "none",
-                  },
-                }}
-              >
-                <ArrowLeft />
-              </Box>
+                    "&.swiper-button-disabled": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <ArrowLeft />
+                </Box>
+              </Show>
 
               <Box
                 position="absolute"
@@ -136,39 +143,53 @@ const Tabs = () => {
                   right: "100%",
                   width: "40px",
                   height: "100%",
-                  backgroundImage:
-                    "linear-gradient(to left,white,rgb(255 255 255 / 0))",
+                  bg: "white",
+
+                  "&::after": {
+                    position: "absolute",
+                    content: "''",
+                    width: "100%",
+                    right: "100%",
+                    height: "100%",
+                    backgroundImage:
+                      "linear-gradient(to left,white,rgb(255 255 255 / 0))",
+                  },
                 }}
               />
-              <Box
-                ref={nextRef}
-                w="28px"
-                h="28px"
-                boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-                bg="white"
-                cursor="pointer"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="full"
-                position="absolute"
-                right="6px"
-                zIndex="dropdown"
-                __css={{
-                  top: "50%",
-                  transform: "translate3d(0 , -50% , 0)",
 
-                  "&:hover": {
-                    boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                  },
+              <Show breakpoint="(min-width: 720px)">
+                <Box
+                  ref={nextRef}
+                  w="28px"
+                  h="28px"
+                  boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
+                  border="1px solid rgb(0 0 0 / 0.3)"
+                  bg="white"
+                  cursor="pointer"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  borderRadius="full"
+                  position="absolute"
+                  right="6px"
+                  zIndex="dropdown"
+                  __css={{
+                    top: "50%",
+                    transform: "translate3d(0 , -50% , 0)",
 
-                  "&.swiper-button-disabled": {
-                    display: "none",
-                  },
-                }}
-              >
-                <ArrowRight />
-              </Box>
+                    "&:hover": {
+                      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                    },
+
+                    "&.swiper-button-disabled": {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <ArrowRight />
+                </Box>
+              </Show>
+
               <Swiper
                 modules={[Navigation]}
                 className="swiper-tab"
