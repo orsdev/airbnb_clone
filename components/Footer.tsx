@@ -1,17 +1,42 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { relative } from "path";
+import { FC } from "react";
 import ArrowUp from "remixicon-react/ArrowUpSLineIcon";
+import { MapIcon } from "../constants";
 
-const Footer = () => {
+interface IProps {
+  onShowMap: () => void;
+}
+
+const Footer: FC<IProps> = ({ onShowMap }) => {
   return (
-    <Box
-      pos="fixed"
-      bottom={0}
-      w="full"
-      zIndex="docked"
-      px="40px"
-      overflow="hidden"
-    >
+    <Box pos="fixed" bottom={0} w="full" zIndex="5" px="40px" overflow="hidden">
+      <Flex marginBottom="40px" justifyContent="center">
+        <Box
+          padding="14px 19px"
+          bg="black.100"
+          borderRadius="24px"
+          cursor="pointer"
+          _hover={{
+            transition: "all .2s",
+            transform: "scale(1.04)",
+            boxShadow:
+              "0px 0px 0px 1px transparent, 0px 0px 0px 4px transparent, 0px 6px 16px rgb(0 0 0 / 12%)",
+          }}
+          onClick={onShowMap}
+        >
+          <Text
+            color="white"
+            fontSize="14px"
+            fontWeight={600}
+            display="flex"
+            alignItems="center"
+            gap="8px"
+          >
+            Show map
+            <MapIcon />
+          </Text>
+        </Box>
+      </Flex>
       <Flex
         width="full"
         flexDir={{ base: "column", sm: "row" }}
