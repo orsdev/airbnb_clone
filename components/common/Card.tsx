@@ -1,14 +1,12 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import React, { FC } from "react";
 import Star from "remixicon-react/StarFillIcon";
 import { MouseEvent, useState } from "react";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import ArrowRight from "remixicon-react/ArrowRightSLineIcon";
-import ArrowLeft from "remixicon-react/ArrowLeftSLineIcon";
 import Heart3LineIcon from "remixicon-react/Heart3LineIcon";
 import Heart3FillIcon from "remixicon-react/Heart3FillIcon";
-
-import React, { FC } from "react";
+import SliderCustomNavigation from "./SliderCustomNavigation";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -26,121 +24,26 @@ export type IProps = {
   duration: string;
 };
 
-const CustomNavigation = () => {
-  const swiper = useSwiper();
-  const [slideProgress, setSlideProgress] = useState<number>(0);
-
-  swiper.on("slideChange", (e) => {
-    setSlideProgress(e.progress);
-  });
-
-  const handlePrev = () => {
-    swiper.slidePrev();
-  };
-
-  const handleNext = () => {
-    swiper.slideNext();
-  };
-
-  return (
-    <>
-      {/* Prev Icon */}
-      <Box
-        as="div"
-        className={`swiper__prev ${
-          slideProgress === 0 ? "swiper-button-disabled" : ""
-        }`}
-        onClick={handlePrev}
-        w="28px"
-        h="28px"
-        boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-        border="1px solid rgb(0 0 0 / 0.3)"
-        bg="white"
-        cursor="pointer"
-        display={{ base: "none", md: "flex" }}
-        visibility="hidden"
-        justifyContent="center"
-        alignItems="center"
-        borderRadius="full"
-        position="absolute"
-        left="26px"
-        opacity={0.8}
-        zIndex="dropdown"
-        __css={{
-          top: "50%",
-          transform: "translate3d(0 , -50% , 0)",
-
-          "&:hover": {
-            opacity: 1,
-          },
-
-          "&.swiper-button-disabled": {
-            display: "none",
-          },
-        }}
-      >
-        <ArrowLeft size={14} />
-      </Box>
-
-      {/* Next Icon */}
-      <Box
-        className={`swiper__next ${
-          slideProgress === 1 ? "swiper-button-disabled" : ""
-        }`}
-        onClick={handleNext}
-        w="28px"
-        h="28px"
-        boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-        visibility="hidden"
-        border="1px solid rgb(0 0 0 / 0.3)"
-        bg="white"
-        cursor="pointer"
-        display={{ base: "none", md: "flex" }}
-        justifyContent="center"
-        alignItems="center"
-        borderRadius="full"
-        position="absolute"
-        right="26px"
-        zIndex="dropdown"
-        opacity={0.8}
-        __css={{
-          top: "50%",
-          transform: "translate3d(0 , -50% , 0)",
-
-          "&:hover": {
-            opacity: 1,
-          },
-
-          "&.swiper-button-disabled": {
-            display: "none",
-          },
-        }}
-      >
-        <ArrowRight size={15} />
-      </Box>
-    </>
-  );
-};
-
-const Card: FC<{ data: IProps; index: number }> = ({ data, index }) => {
+const Card: FC<{ data: IProps }> = ({ data }) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
     <Box
       w="full"
       overflow="hidden"
+      pos="relative"
       cursor="pointer"
-      className={`card__container__${index}`}
+      bg="white"
       __css={{
         ".swiper-pagination-bullet": {
           transform: "scale(.8)",
         },
 
-        "& .swiper__image:hover": {
-          "& .swiper__next": {
+        "&:hover": {
+          ".swiper__next__card": {
             visibility: "visible",
           },
-          "& .swiper__prev": {
+          "& .swiper__prev__card": {
             visibility: "visible",
           },
         },
@@ -159,14 +62,19 @@ const Card: FC<{ data: IProps; index: number }> = ({ data, index }) => {
       >
         {data?.images?.map((image) => (
           <SwiperSlide key={image}>
-            <Box pos="relative" className="swiper__image" w="full" h="284px">
+            <Box
+              pos="relative"
+              className="swiper__image"
+              w="full"
+              h="284px"
+              zIndex="dropdown"
+            >
               <Box
                 pos="absolute"
                 top="20px"
                 right="16px"
                 as="button"
                 color="white"
-                zIndex="sticky"
                 __css={{
                   ".favourite-clicked": {
                     fill: " #ff385c",
@@ -188,8 +96,7 @@ const Card: FC<{ data: IProps; index: number }> = ({ data, index }) => {
                 borderRadius="12px"
                 objectFit="cover"
               />
-
-              <CustomNavigation />
+              <SliderCustomNavigation />
             </Box>
           </SwiperSlide>
         ))}
