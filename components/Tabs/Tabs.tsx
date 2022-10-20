@@ -12,29 +12,14 @@ import {
 import { TAB_CONTENT } from "./constants";
 import ArrowRight from "remixicon-react/ArrowRightSLineIcon";
 import ArrowLeft from "remixicon-react/ArrowLeftSLineIcon";
+import { Navigation } from "swiper";
+import { useState } from "react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-// import required modules
-import SwiperCore, { Navigation } from "swiper";
-import { useRef, useState } from "react";
-
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const prevRef = useRef<HTMLDivElement>(null);
-  const nextRef = useRef<HTMLDivElement>(null);
-
-  const onBeforeInit = (swiper: SwiperCore): void => {
-    if (typeof swiper.params.navigation !== "boolean") {
-      const { navigation } = swiper.params;
-
-      if (navigation) {
-        navigation.prevEl = prevRef.current;
-        navigation.nextEl = nextRef.current;
-      }
-    }
-  };
 
   return (
     <>
@@ -100,38 +85,37 @@ const Tabs = () => {
                 }}
               />
 
-              <Show breakpoint="(min-width: 720px)">
-                <Box
-                  ref={prevRef}
-                  w="28px"
-                  h="28px"
-                  boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-                  border="1px solid rgb(0 0 0 / 0.3)"
-                  bg="white"
-                  cursor="pointer"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  borderRadius="full"
-                  position="absolute"
-                  left="26px"
-                  zIndex="dropdown"
-                  __css={{
-                    top: "50%",
-                    transform: "translate3d(0 , -50% , 0)",
+              <Box
+                as="div"
+                className="swiper__prev"
+                w="28px"
+                h="28px"
+                boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
+                border="1px solid rgb(0 0 0 / 0.3)"
+                bg="white"
+                cursor="pointer"
+                display={{ base: "none", md: "flex" }}
+                justifyContent="center"
+                alignItems="center"
+                borderRadius="full"
+                position="absolute"
+                left="26px"
+                zIndex="dropdown"
+                __css={{
+                  top: "50%",
+                  transform: "translate3d(0 , -50% , 0)",
 
-                    "&:hover": {
-                      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                    },
+                  "&:hover": {
+                    boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                  },
 
-                    "&.swiper-button-disabled": {
-                      display: "none",
-                    },
-                  }}
-                >
-                  <ArrowLeft />
-                </Box>
-              </Show>
+                  "&.swiper-button-disabled": {
+                    display: "none",
+                  },
+                }}
+              >
+                <ArrowLeft />
+              </Box>
 
               <Box
                 position="absolute"
@@ -157,38 +141,36 @@ const Tabs = () => {
                 }}
               />
 
-              <Show breakpoint="(min-width: 720px)">
-                <Box
-                  ref={nextRef}
-                  w="28px"
-                  h="28px"
-                  boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
-                  border="1px solid rgb(0 0 0 / 0.3)"
-                  bg="white"
-                  cursor="pointer"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  borderRadius="full"
-                  position="absolute"
-                  right="6px"
-                  zIndex="dropdown"
-                  __css={{
-                    top: "50%",
-                    transform: "translate3d(0 , -50% , 0)",
+              <Box
+                className="swiper__next"
+                w="28px"
+                h="28px"
+                boxShadow="0px 2px 5px rgba(39, 134, 200, 0.12)"
+                border="1px solid rgb(0 0 0 / 0.3)"
+                bg="white"
+                cursor="pointer"
+                display={{ base: "none", md: "flex" }}
+                justifyContent="center"
+                alignItems="center"
+                borderRadius="full"
+                position="absolute"
+                right="6px"
+                zIndex="dropdown"
+                __css={{
+                  top: "50%",
+                  transform: "translate3d(0 , -50% , 0)",
 
-                    "&:hover": {
-                      boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                    },
+                  "&:hover": {
+                    boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                  },
 
-                    "&.swiper-button-disabled": {
-                      display: "none",
-                    },
-                  }}
-                >
-                  <ArrowRight />
-                </Box>
-              </Show>
+                  "&.swiper-button-disabled": {
+                    display: "none",
+                  },
+                }}
+              >
+                <ArrowRight />
+              </Box>
 
               <Swiper
                 modules={[Navigation]}
@@ -233,10 +215,9 @@ const Tabs = () => {
                   },
                 }}
                 navigation={{
-                  prevEl: prevRef.current!,
-                  nextEl: nextRef.current!,
+                  prevEl: ".swiper__prev",
+                  nextEl: ".swiper__next",
                 }}
-                onBeforeInit={onBeforeInit}
               >
                 {TAB_CONTENT.map((item, index) => (
                   <SwiperSlide key={item.title}>
