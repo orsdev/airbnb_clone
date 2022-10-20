@@ -85,6 +85,7 @@ const Tabs = () => {
                 }}
               />
 
+              {/* Prev Icon */}
               <Box
                 as="div"
                 className="swiper__prev"
@@ -103,7 +104,7 @@ const Tabs = () => {
                 zIndex="dropdown"
                 __css={{
                   top: "50%",
-                  transform: "translate3d(0 , -50% , 0)",
+                  transform: "translate3d(0 , -55% , 0)",
 
                   "&:hover": {
                     boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
@@ -141,6 +142,7 @@ const Tabs = () => {
                 }}
               />
 
+              {/* Next Icon */}
               <Box
                 className="swiper__next"
                 w="28px"
@@ -158,7 +160,7 @@ const Tabs = () => {
                 zIndex="dropdown"
                 __css={{
                   top: "50%",
-                  transform: "translate3d(0 , -50% , 0)",
+                  transform: "translate3d(0 , -55% , 0)",
 
                   "&:hover": {
                     boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
